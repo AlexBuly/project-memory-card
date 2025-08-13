@@ -1,37 +1,30 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
 
-export function Card() {
-    const [pokemons, setPokemons] = useState([]);
+export function Card({pokemonName, addVisited}) {
+    const [pokemon, setPokemon] = useState(null);
 
     useEffect(() => {
-        async function fetchPokemons() {
-             const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=15');
-              const data = await response.json();
+    async function fetchPokemon() {
+      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
+      const data = await response.json();
+      setPokemon(data);
+    }
+    fetchPokemon();
+  }, [pokemonName]);
 
-        const pokemonInfo = await Promise.all(
-            data.results.map(async (pokemon) => {
-                const res = await fetch(pokemon.url);
-                return await res.json();
-            })
-        );
-        setPokemons(pokemonInfo);
-        }
-
-        fetchPokemons();
-    }, [])
+  if (!pokemon) return <p>Loading...</p>;
 
     return (
-    <>
-        {pokemons.map(pokemon => {
-            return (
-                <div key={pokemon.id} className="my-cards">
-                    <img className="pokemon-img" src={pokemon.sprites.front_default} alt={pokemon.name} />
-                    <div className="pokemon-name">
-                        <p>{pokemon.name}</p>
-                    </div>
+        <>
+            <div 
+                onClick={() => addVisited(pokemon.name)}  
+                className="my-cards"
+                >
+                <img className="pokemon-img" src={pokemon.sprites.front_default} alt={pokemon.name} />
+                <div className="pokemon-name">
+                    <p>{pokemon.name}</p>
                 </div>
-            )
-        })}
-    </>
-)
+            </div>
+        </>
+    )
 }
