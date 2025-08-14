@@ -24,6 +24,17 @@ export function Pokemon() {
         "caterpie"
     ];
 
+    const shuffleArray = (array) => {
+        const newArray = [...array];
+        for (let i =  newArray.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [newArray[i], newArray[j]] = [newArray[j], newArray[i]]; 
+        }
+        return newArray;
+    }
+
+    const [shuffledCards, setShuffledCards] = useState(shuffleArray(pokemonNames));
+
     const addVisited = (name) => {
         if (visited.includes(name)) {
             setBestScore(prevBest => Math.max(prevBest, currentScore));
@@ -33,14 +44,15 @@ export function Pokemon() {
             setCurrentScore(prevScore => prevScore + 1);
             setVisited(prev => [...prev, name]);
         }
+
+        setShuffledCards(prev => shuffleArray(prev));
     };
     return (
         <>
             <p>Best Score: {bestScore} </p>
             <p>Current Score: {currentScore}</p>
-            <h2>All Pokemons:</h2>
             <div style={{ display: "grid", gridTemplateRows: "1fr 1fr", gridTemplateColumns: "repeat(5, 1fr)", gap: "1rem", flexWrap: "wrap" }}>
-                {pokemonNames.map(name => (
+                {shuffledCards.map(name => (
                 <Card
                     key={name}
                     pokemonName={name}
