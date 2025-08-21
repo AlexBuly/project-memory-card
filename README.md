@@ -1,12 +1,5 @@
-# React + Vite
+In this project, I built a memory card application that keeps track of cards clicked. First, a card a component for an individual card was created. These cards use data from a Pokemon API. This component contains 2 props: pokemonName and addVisited. First, the data is fetched from the API with the names of Pokemons from pokemonName. AddVisited is called using an inline arrow function. 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Next, is a component for all the pokemon cards called Pokemon. This component contains 3 state variables: visited, currentScore, and bestScore. There is an array with 15 Pokemon names which are used for Pokemon cards. After each click, these cards are shuffled by first getting the last element of the array, choosing a random index between that last index and the first index, and then swapping those 2 elements. The shuffled cards are then also used as a state variable. Next, is the function which adds cards to the visited array. If the array already includes the current name being passed, the best score will be set to either the current score or the previous best score, whichever is larger. The current score is set to 0 and the visited array is emptied. 
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Lastly, all of these components are put within a main App component.
