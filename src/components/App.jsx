@@ -1,10 +1,10 @@
 import { Pokemon } from './Pokemon';
 
-//import { Score } from './Score'
 function App() {
   return (
     <>
-      <h1>Memory Card</h1>
+      <h1 className='title'>Memory Card</h1>
+      <p className='directions'>Get points by clicking on a Pokémon but don't click on any more than once!</p>
       <Pokemon/>
    
     </>

@@ -49,16 +49,18 @@ export function Pokemon() {
     };
     return (
         <>
-            <p>Best Score: {bestScore} </p>
-            <p>Current Score: {currentScore}</p>
-            <div style={{ display: "grid", gridTemplateRows: "1fr 1fr", gridTemplateColumns: "repeat(5, 1fr)", gap: "1rem", flexWrap: "wrap" }}>
+            <div className="scores">
+                <p>Best Score: {bestScore} </p>
+                <p>Current Score: {currentScore}</p>
+            </div>
+            <div className="cards">
                 {shuffledCards.map(name => (
                 <Card
                     key={name}
                     pokemonName={name}
                     addVisited={addVisited}
                 />
-                ))};
+                ))}
       </div>
         </>
     )

@@ -12,7 +12,7 @@ export function Card({pokemonName, addVisited}) {
     fetchPokemon();
   }, [pokemonName]);
 
-  if (!pokemon) return <p>Loading...</p>;
+  if (!pokemon) return <p>Loading...</p>
 
     return (
         <>
